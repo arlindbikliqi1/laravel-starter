@@ -20,4 +20,9 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no root@23.88.98.228 "cd /var/www/starter/laravel-starter-main && git pull && composer install && php artisan migrate"
+          ssh -o StrictHostKeyChecking=no root@23.88.98.228 << 'EOF'
+            cd /var/www/starter/laravel-starter-main
+            git pull origin main
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+          EOF
