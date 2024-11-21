@@ -3,7 +3,7 @@ name: Deploy Laravel Project
 on:
   push:
     branches:
-      - master  # or the branch you want to trigger deployment on
+      - main  # or the branch you want to trigger deployment on
 
 jobs:
   deploy:
