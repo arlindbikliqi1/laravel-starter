@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest  # Run on the latest Ubuntu environment
 
-    steps:
+      steps:
       - name: Checkout code
         uses: actions/checkout@v2  # Checkout the repository
 
