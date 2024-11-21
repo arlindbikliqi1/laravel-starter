@@ -1,23 +1,23 @@
-name: Deploy Laravel App
+name: Deploy Laravel Project
 
 on:
   push:
     branches:
-      - main  # This will trigger the deployment on push to the 'main' branch
+      - main  # or the branch you want to trigger deployment on
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Runs on the latest Ubuntu environment
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # Checks out the repository code
-    
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3  # Use SSH to access your server
-      with:
-        ssh-private-key: ${{ secrets.SERVER_KEY }}  # Add your private SSH key to GitHub secrets
+    runs-on: ubuntu-latest
 
-    - name: Deploy to server
-      run: |
-        ssh -v -o StrictHostKeyChecking=no root@23.88.98.228 "cd /var/www/starter/laravel-starter-main && git pull origin main && composer install --no-dev --optimize-autoloader && php artisan migrate && php artisan config:cache && php artisan route:cache && pm2 restart your-app"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SERVER_KEY }}
+
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no root@23.88.98.228 "cd /var/www/starter/laravel-starter-main && git pull && composer install && php artisan migrate"
